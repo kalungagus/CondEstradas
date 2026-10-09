@@ -220,4 +220,5 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Pastas adicionais do projeto
-Datasets/
+bronze/
+prata/
