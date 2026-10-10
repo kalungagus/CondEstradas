@@ -1,0 +1,151 @@
+RELATÓRIO DE LEITURAS MÚLTIPLAS DE ICM
+Unidade de análise: trecho de 1 km (uf, rodovia, km) em um sentido e um mês.
+
+Leituras analisadas (sem repetições entre arquivos): 3025523
+Leituras com sentido deduzido pela ordem dos kms:    1253203
+Leituras ainda sem sentido:                          38
+Trechos de 1 km:                                     64226
+Combinações trecho × sentido × mês:                  2996280
+
+1) Trecho-sentido-mês com mais de uma leitura no mesmo mês
+   27104 combinações (0.9%), em 11727 trechos (18.3% dos trechos)
+
+2) Destas, quantas têm valores de ICM diferentes
+   diferentes: 23389 (86.3%)
+   iguais:     3715 (13.7%)
+
+3) Causa × valores
+   valores                   diferentes  iguais  total
+   causa                                              
+   datas diferentes no mês        14527    2553  17080
+   mesma data                      4237     100   4337
+   pedaços menores que 1 km        4625    1062   5687
+   total                          23389    3715  27104
+
+4) Diferença de ICM (máximo − mínimo) quando os valores diferem
+                             casos  mediana   p90  máximo
+   causa                                                 
+   datas diferentes no mês   14527    10.25  38.5    92.5
+   mesma data                 4237     9.00  33.0    92.5
+   pedaços menores que 1 km   4625    10.50  38.4    86.5
+
+5) Dispersão das leituras de um mesmo trecho-sentido-mês, quando os valores diferem
+   (variância e desvio padrão amostrais de cada caso, resumidos por causa)
+                             casos  leituras_media  desvio_medio  desvio_mediano  desvio_p90  variancia_media  variancia_mediana  media_menos_mediana
+   causa                                                                                                                                             
+   datas diferentes no mês   14527            2.08         10.75            7.25       25.99           226.18              52.53                 0.29
+   mesma data                 4237            2.02          9.84            6.36       22.98           186.07              40.50                 0.09
+   pedaços menores que 1 km   4625            2.20         10.65            7.42       24.75           215.08              55.12                 0.52
+   media_menos_mediana: diferença absoluta média entre média e mediana do caso;
+   valores altos indicam uma leitura muito diferente das demais.
+
+6) Leituras vizinhas: a série tende à menor ou à maior leitura do mês?
+   Compara a leitura anterior e a próxima do mesmo trecho e sentido (até 3 meses de distância)
+   com a menor e a maior leitura do mês. Posição = (vizinha − menor) / (maior − menor):
+   0 = igual à menor, 1 = igual à maior. Só casos com valores diferentes.
+
+   Próxima leitura, por faixa de desvio padrão do caso
+                 casos perto_da_menor perto_da_maior no_meio abaixo_da_menor acima_da_maior  posicao_mediana
+   faixa_desvio                                                                                             
+   até 5          8406            47%            49%      4%             27%            31%             0.50
+   5 a 10         4739            55%            42%      3%             24%            22%             0.39
+   10 a 20        4680            57%            40%      3%             20%            13%             0.40
+   acima de 20    3294            66%            32%      2%             15%             7%             0.33
+
+   Leitura anterior, por faixa de desvio padrão do caso
+                 casos perto_da_menor perto_da_maior no_meio abaixo_da_menor acima_da_maior  posicao_mediana
+   faixa_desvio                                                                                             
+   até 5          7067            44%            52%      5%             24%            37%             0.63
+   5 a 10         4275            51%            46%      3%             21%            25%             0.47
+   10 a 20        4275            54%            42%      3%             18%            15%             0.43
+   acima de 20    3175            62%            36%      2%             13%             9%             0.37
+
+   Próxima leitura, por causa
+                             casos perto_da_menor perto_da_maior no_meio abaixo_da_menor acima_da_maior  posicao_mediana
+   causa                                                                                                                
+   datas diferentes no mês   13228            57%            42%      2%             24%            21%             0.34
+   mesma data                 3860            55%            44%      2%             26%            24%             0.41
+   pedaços menores que 1 km   4031            45%            45%     11%             16%            22%             0.50
+
+   Datas diferentes no mês (13214 casos): a próxima leitura fica mais perto da
+   avaliação mais recente em 49.3% e da mais antiga em 49.2%;
+   a avaliação mais recente é a menor em 50.1% dos casos.
+
+7) Origem das leituras múltiplas
+   no mesmo arquivo:       24319 (89.7%)
+   em arquivos diferentes: 2785 (10.3%)
+
+8) Arquivos com mais ocorrências
+   icm_2021_10.csv           2528
+   icm_2022_08.csv           1772
+   icm_2021_12.csv           1546
+   icm_2021_07.csv           1446
+   icm_2021_11.csv           1445
+   icm_2021_06.csv           1254
+   icm_2024_07.csv           1194
+   icm_2025_05.csv           1173
+   icm_2022_03.csv           1170
+   icm_2023_09.csv           1164
+
+9) Levantamentos suspeitos
+   Levantamento: leituras de uma rodovia, em um sentido, em uma data. Cada km é comparado
+   com a média do mês anterior e do seguinte (até 3 meses) no mesmo km e sentido.
+   Suspeito: diferença mediana para os vizinhos de 25 pontos ou mais.
+
+   Levantamentos avaliados (≥ 10 km comparáveis): 27195
+   Suspeitos: 92 (0.3%), somando 6367 km avaliados
+      abaixo dos vizinhos (ICM baixo demais): 32
+      acima dos vizinhos (ICM alto demais):   60
+
+   Distribuição da diferença mediana de todos os levantamentos avaliados:
+   p1: -13.8   p5: -7.1   p50: 0.0   p95: 7.8   p99: 14.9
+
+   Mais abaixo dos vizinhos:
+   uf rodovia sentido       data  km_avaliados  icm_medio  icm_vizinhos_medio  diferenca_mediana  proporcao_km_discrepantes  icp_zero  icm_distintos
+   PI  BR-343       D 2024-07-24            74      13.26               50.81             -41.75                       0.58      0.53              8
+   SC  BR-163       C 2020-11-18            63      49.25               84.77             -38.75                       0.60      0.00             22
+   MG  BR-116       D 2021-10-18           184      47.69               76.95             -35.00                       0.60      0.00             37
+   PR  BR-476       D 2021-08-30            13      16.52               47.78             -33.25                       0.62      0.00              2
+   SC  BR-158       C 2020-11-17            50      42.43               74.78             -33.12                       0.58      0.00             12
+   MA  BR-135       C 2021-11-29            12      23.52               57.24             -32.72                       0.83      0.00              8
+   PR  BR-369       C 2021-11-29            39      19.05               42.27             -32.25                       0.55      0.44             13
+   AP  BR-156       C 2021-12-21            54      24.06               54.36             -31.75                       0.54      0.00             25
+   PR  BR-376       C 2021-11-30            12      22.96               47.73             -31.60                       0.50      0.00              7
+   RO  BR-364       C 2021-07-15           209      52.68               46.60             -31.50                       0.63      0.09             97
+
+   Mais acima dos vizinhos:
+   uf rodovia sentido       data  km_avaliados  icm_medio  icm_vizinhos_medio  diferenca_mediana  proporcao_km_discrepantes  icp_zero  icm_distintos
+   MA  BR-135       D 2021-12-14            24      79.73               36.83              48.31                       0.79      0.00              9
+   PR  BR-369       D 2022-03-22            39      85.76               42.54              46.50                       0.78      0.00             14
+   AC  BR-317       C 2023-09-23           302      40.70                0.60              42.75                       0.71      0.04            111
+   BA  BR-101       C 2022-03-24            10      63.10               24.02              40.62                       0.90      0.00              8
+   AM  BR-317       C 2025-03-11            11      51.61               15.86              38.25                       0.73      0.00             10
+   AM  BR-317       C 2025-03-10            37      53.47               18.49              37.75                       0.54      0.08             23
+   PA  BR-155       C 2023-09-23            95      49.88               13.59              37.75                       0.72      0.03             47
+   MA  BR-135       C 2024-05-27           118      74.99               41.72              36.06                       0.58      0.04             50
+   MA  BR-135       C 2020-11-20            57      73.10               31.87              35.50                       0.53      0.02             25
+   RO  BR-364       C 2021-06-17           108      48.40               18.17              35.00                       0.62      0.04             65
+
+   icp_zero: proporção de km com ICP = 0; icm_distintos: quantidade de valores de ICM diferentes.
+   Lista completa, com todos os levantamentos avaliados, em ./relatorio_levantamentos.csv.
+
+10) Levantamentos copiados de meses anteriores
+   Cópia: levantamento cujos km repetem, no mesmo dia, as leituras de um levantamento
+   1, 2, 3 mês(es) antes, com ICC, ICP e ICM idênticos em pelo menos 95% dos km
+   (mínimo de 10 km pareados).
+
+   Cópias encontradas: 226 levantamentos, 23562 km
+
+   Por arquivo:
+                                                      levantamentos     km
+   arquivo_original arquivo         meses_adiantados                      
+   icm_2024_01.csv  icm_2024_02.csv 1                           221  23325
+   icm_2021_10.csv  icm_2021_11.csv 1                             1    100
+   icm_2021_08.csv  icm_2021_11.csv 3                             1     71
+   icm_2024_06.csv  icm_2024_09.csv 3                             1     35
+   icm_2022_03.csv  icm_2022_05.csv 2                             1     19
+   icm_2025_01.csv  icm_2025_04.csv 3                             1     12
+
+   Cópias com poucos valores distintos de ICM (até 3) podem ser rodovias que de fato
+   não mudaram; as demais dificilmente coincidem por acaso.
+   Lista completa em ./relatorio_copias.csv.

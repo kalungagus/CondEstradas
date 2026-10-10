@@ -16,7 +16,6 @@ COLUNAS_NUMERICAS = ['km inicial', 'km final', 'icc', 'icp', 'icm']
 MAPA_COLUNAS = {
     'ic': 'icc',
     'ip': 'icp',
-    'icmnp': 'icm',
     'km_inicial': 'km inicial',
     'km_final': 'km final',
     'data aval.': 'data',
@@ -242,6 +241,15 @@ def processar(arquivo, destino, saidas_geradas):
         df = ler_csv(arquivo)
 
     df, colunas_geradas = padronizar(df)
+
+    # Arquivos só com ICMNP (rodovias não pavimentadas) não entram na camada prata
+    if df['icm'].isna().all():
+        print(f'{os.path.basename(arquivo):45} → ignorado (sem ICM)')
+        return {
+            'arquivo_original': os.path.basename(arquivo),
+            'observacoes': 'ignorado: sem coluna ICM (ICMNP é de rodovia não pavimentada)',
+        }
+
     data = extrair_data(arquivo, df)
     observacoes = []
 
@@ -268,7 +276,7 @@ def processar(arquivo, destino, saidas_geradas):
     saidas_geradas[nome_saida] = os.path.basename(arquivo)
 
     caminho_saida = os.path.join(destino, nome_saida)
-    df.to_csv(caminho_saida, index=False, sep=';', encoding="utf-8-sig", date_format='%Y-%m-%d')
+    df.to_csv(caminho_saida, index=False, sep=';', decimal=',', encoding="utf-8-sig", date_format='%Y-%m-%d')
     print(f'{os.path.basename(arquivo):45} → {nome_saida} ({len(df)} linhas)')
 
     return {
