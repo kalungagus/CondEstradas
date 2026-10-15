@@ -1,0 +1,7 @@
+# Ambiente recomendado: Python 3.13
+tensorflow==2.21.0
+scikit-learn==1.9.1
+numpy>=1.26,<3.0
+pandas>=2.2,<3.0
+matplotlib>=3.9,<4.0
+ipykernel>=6.29,<8.0
